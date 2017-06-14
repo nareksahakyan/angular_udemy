@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link href="style.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -32,14 +33,24 @@
 
     <md-content class="md-padding" layout="row" layout-wrap>
         <md-card ng-repeat="smt in myobject" flex="25">
-            <img ng-src="{{smt.image}}" alt=""/>
-        <md-card-content>
-            <div class="classified-info">
-                <h2 class="md-title">{{smt.title}}</h2>
-                <h3>{{smt.price}}</h3>
-                <p>{{smt.txt}}</p>
+            <img ng-src="{{smt.image}}" alt="" />
+            <md-card-content>
+                <div class="classified-info">
+                    <h2 class="md-title">{{smt.title}}</h2>
+                    <h3>{{smt.price | currency }}</h3>
+                    <p>{{smt.txt}}</p>
+                </div>
+            </md-card-content>
+            <md-button ng-show="!showadmin" ng-click="showadmin = true">Admin</md-button>
+            <md-button ng-show="showadmin" ng-click="showadmin = false">Close</md-button>
+
+            <div ng-if="showadmin">
+                <h3 class="md-body-2">Admin</h3>
+                <div layout="row">
+                    <md-button class="md-primary">Edit</md-button>
+                    <md-button class="md-warn">Delete</md-button>
+                </div>
             </div>
-        </md-card-content>
         </md-card>
     </md-content>
 
