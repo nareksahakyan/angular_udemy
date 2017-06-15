@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link href="style.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+
+    <script src="scripts/myngapp.js"></script>
+    <script src="scripts/myngCntrl.js"></script>
+    <script src="scripts/myngapp.fac.js"></script>
+</head>
+<body ng-app="myngapp" ng-controller="myngcntrl" ng-init="sts='status'">
+
+    <!--<h1>{{sts}}</h1>
+    <h1>{{name}}</h1>-->
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <p><strong>My Application</strong></p>
+            <md-button ng-click="opensidebar()">
+                <md-icon class="mdi mdi-plus-circle">new application</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools"> Add an item</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <form>
+                <md-input-container>
+                    <laber for="title">Title</laber>
+                    <input type="text" id="title" 
+                          ng-model="myobject_view.title" md-autofocus />
+                </md-input-container>
+                <md-input-container>
+                    <laber for="title">Price</laber>
+                    <input type="text" id="price"
+                           ng-model="myobject_view.price" md-autofocus />
+                </md-input-container>
+                <md-input-container>
+                    <laber for="title">txt</laber>
+                    <input type="text" id="txt"
+                           ng-model="myobject_view.txt" md-autofocus />
+                </md-input-container>
+                <md-input-container>
+                    <laber for="title">Image Link</laber>
+                    <input type="text" id="image"
+                           ng-model="myobject_view.image" md-autofocus />
+                </md-input-container>
+                <md-button class="md-primary" ng-click="saveMyobjectView(myobject_view)">Save</md-button>
+                <md-button class="md-primary">Save Edit</md-button>
+                <md-button class="md-warn" ng-click="closesidebar()">Cancel</md-button>
+           <pre>{{myobject_view | json}}</pre>
+             </form>
+        </md-content>
+
+    </md-sidenav>
+    <md-content class="md-padding" layout="row" layout-wrap>
+        <md-card ng-repeat="smt in myobject" flex="25">
+            <img ng-src="{{smt.image}}" alt="" />
+            <md-card-content>
+                <div class="classified-info">
+                    <h2 class="md-title">{{smt.title}}</h2>
+                    <h3>{{smt.price | currency }}</h3>
+                    <p>{{smt.txt}}</p>
+                </div>
+            </md-card-content>
+            <md-button ng-show="!showadmin" ng-click="showadmin = true">Admin</md-button>
+            <md-button ng-show="showadmin" ng-click="showadmin = false">Close</md-button>
+
+            <div ng-if="showadmin">
+                <h3 class="md-body-2">Admin</h3>
+                <div layout="row">
+                    <md-button class="md-primary">Edit</md-button>
+                    <md-button class="md-warn">Delete</md-button>
+                </div>
+            </div>
+        </md-card>
+    </md-content>
+
+
+</body>
+</html>
